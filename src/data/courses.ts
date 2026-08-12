@@ -1,12 +1,14 @@
 // Estrutura de dados preparada para futura integração com banco de dados.
 // Basta substituir o array por uma chamada à API/BD mantendo a mesma interface.
 
-import imgEnfermagem from "@/assets/course-enfermagem.jpg";
-import imgAdministracao from "@/assets/course-administracao.jpg";
-import imgSeguranca from "@/assets/course-seguranca.jpg";
-import imgLogistica from "@/assets/course-logistica.jpg";
-import imgInformatica from "@/assets/course-informatica.jpg";
-import imgRh from "@/assets/course-rh.jpg";
+// Caminhos fixos em /public — não usar import de asset aqui: o hash gerado pelo Vite
+// muda a cada build e quebraria as URLs já salvas no banco (importadas via admin).
+const imgEnfermagem = "/images/courses/enfermagem.jpg";
+const imgAdministracao = "/images/courses/administracao.jpg";
+const imgSeguranca = "/images/courses/seguranca.jpg";
+const imgLogistica = "/images/courses/logistica.jpg";
+const imgInformatica = "/images/courses/informatica.jpg";
+const imgRh = "/images/courses/rh.jpg";
 
 export interface Course {
   id: string;

@@ -31,6 +31,7 @@ const Cursos = () => {
   // Categorias que sempre exibem em formato de lista (alto volume)
   const LIST_ONLY_CATEGORIES = new Set([
     "pos-graduacao",
+    "profissionalizantes",
     "profissionalizantes-premium",
     "profissionalizantes-avancado",
     "profissionalizantes-comum",
@@ -74,6 +75,15 @@ const Cursos = () => {
   }, [category, query, courses]);
 
   // Listas fixas exibidas quando "Todas" está selecionado
+  const profissionalizantesList = useMemo(
+    () =>
+      courses.filter(
+        (c) =>
+          c.category === "profissionalizantes" &&
+          c.name.toLowerCase().includes(query.toLowerCase()),
+      ),
+    [courses, query],
+  );
   const profissionalizantesPremiumList = useMemo(
     () =>
       courses.filter(
@@ -288,7 +298,7 @@ const Cursos = () => {
                       ))}
                     </div>
                   ) : (
-                    (!isAll || (profissionalizantesPremiumList.length === 0 && profissionalizantesAvancadoList.length === 0 && profissionalizantesComumList.length === 0 && posGraduacaoList.length === 0)) && (
+                    (!isAll || (profissionalizantesList.length === 0 && profissionalizantesPremiumList.length === 0 && profissionalizantesAvancadoList.length === 0 && profissionalizantesComumList.length === 0 && posGraduacaoList.length === 0)) && (
                       <div className="mx-auto max-w-md rounded-2xl border border-dashed border-border bg-card/50 p-10 text-center">
                         <p className="font-display text-lg font-semibold text-foreground">
                           Nenhum curso encontrado
@@ -359,6 +369,12 @@ const Cursos = () => {
                     </nav>
                   )}
 
+                  {isAll && profissionalizantesList.length > 0 && (
+                    <CourseList
+                      title="Profissionalizantes"
+                      courses={profissionalizantesList}
+                    />
+                  )}
                   {isAll && profissionalizantesPremiumList.length > 0 && (
                     <CourseList
                       title="Profissionalizantes Premium"
