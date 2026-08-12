@@ -94,7 +94,7 @@ const Hero = () => {
         style={{ background: "radial-gradient(closest-side, hsl(var(--primary-glow)), transparent)" }}
       />
 
-      <div className="container relative grid gap-10 pt-12 pb-28 md:grid-cols-2 md:pt-20 md:pb-36">
+      <div className="container relative grid gap-10 pt-8 pb-20 md:grid-cols-2 md:pt-12 md:pb-28">
         {isFirst ? (
           <>
             <div className="space-y-6 animate-fade-in">
