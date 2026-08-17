@@ -30,7 +30,6 @@ const Cursos = () => {
 
   // Categorias que sempre exibem em formato de lista (alto volume)
   const LIST_ONLY_CATEGORIES = new Set([
-    "pos-graduacao",
     "profissionalizantes",
     "profissionalizantes-premium",
     "profissionalizantes-avancado",
@@ -111,15 +110,13 @@ const Cursos = () => {
       ),
     [courses, query],
   );
-  const posGraduacaoList = useMemo(
-    () =>
-      courses.filter(
-        (c) =>
-          c.category === "pos-graduacao" &&
-          c.name.toLowerCase().includes(query.toLowerCase()),
-      ),
-    [courses, query],
-  );
+  const totalDisplayCount = isAll
+    ? filtered.length +
+      profissionalizantesList.length +
+      profissionalizantesPremiumList.length +
+      profissionalizantesAvancadoList.length +
+      profissionalizantesComumList.length
+    : filtered.length;
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const currentPage = Math.min(page, totalPages);
@@ -222,8 +219,8 @@ const Cursos = () => {
             {/* Results count + view toggle */}
             <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
               <p className="text-sm text-muted-foreground">
-                {filtered.length}{" "}
-                {filtered.length === 1 ? "curso encontrado" : "cursos encontrados"}
+                {totalDisplayCount}{" "}
+                {totalDisplayCount === 1 ? "curso encontrado" : "cursos encontrados"}
                 {effectiveViewMode === "cards" && filtered.length > PAGE_SIZE && (
                   <span> · Página {currentPage} de {totalPages}</span>
                 )}
@@ -298,7 +295,7 @@ const Cursos = () => {
                       ))}
                     </div>
                   ) : (
-                    (!isAll || (profissionalizantesList.length === 0 && profissionalizantesPremiumList.length === 0 && profissionalizantesAvancadoList.length === 0 && profissionalizantesComumList.length === 0 && posGraduacaoList.length === 0)) && (
+                    (!isAll || (profissionalizantesList.length === 0 && profissionalizantesPremiumList.length === 0 && profissionalizantesAvancadoList.length === 0 && profissionalizantesComumList.length === 0)) && (
                       <div className="mx-auto max-w-md rounded-2xl border border-dashed border-border bg-card/50 p-10 text-center">
                         <p className="font-display text-lg font-semibold text-foreground">
                           Nenhum curso encontrado
@@ -391,12 +388,6 @@ const Cursos = () => {
                     <CourseList
                       title="Profissionalizantes Comum"
                       courses={profissionalizantesComumList}
-                    />
-                  )}
-                  {isAll && posGraduacaoList.length > 0 && (
-                    <CourseList
-                      title="Pós-Graduação"
-                      courses={posGraduacaoList}
                     />
                   )}
                 </>

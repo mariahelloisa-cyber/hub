@@ -3,7 +3,9 @@ import {
   Wrench,
   Award,
   Briefcase,
-  Sparkles,
+  GraduationCap,
+  BookOpen,
+  Users,
   ArrowRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -16,12 +18,12 @@ interface Category {
 }
 
 const categories: Category[] = [
-  { name: "Cursos técnicos", slug: "cursos-tecnicos", count: "30+ cursos", icon: Wrench },
-  { name: "Técnico por competência", slug: "tecnico-competencia", count: "15+ cursos", icon: Award },
-  { name: "Pós-graduação", slug: "pos-graduacao", count: "40+ cursos", icon: Sparkles },
-  { name: "Profissionalizantes Premium", slug: "profissionalizantes-premium", count: "Premium", icon: Briefcase },
-  { name: "Profissionalizantes Avançado", slug: "profissionalizantes-avancado", count: "Avançado", icon: Briefcase },
-  { name: "Profissionalizantes Comum", slug: "profissionalizantes-comum", count: "Comum", icon: Briefcase },
+  { name: "Cursos técnicos", slug: "cursos-tecnicos", count: "70+ cursos", icon: Wrench },
+  { name: "Técnico por competência", slug: "tecnico-competencia", count: "45+ cursos", icon: Award },
+  { name: "Pós técnico", slug: "pos-tecnico", count: "15+ cursos", icon: GraduationCap },
+  { name: "Tecnólogo", slug: "tecnologo", count: "40+ cursos", icon: BookOpen },
+  { name: "EJA", slug: "eja", count: "Ensino de jovens e adultos", icon: Users },
+  { name: "Profissionalizantes", slug: "profissionalizantes", count: "900+ cursos", icon: Briefcase },
 ];
 
 const Categories = () => {

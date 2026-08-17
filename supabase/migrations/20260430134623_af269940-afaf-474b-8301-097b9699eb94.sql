@@ -137,18 +137,14 @@ INSERT INTO public.categories (slug, label, sort_order) VALUES
   ('tecnico-competencia', 'Técnico por competência', 2),
   ('pos-tecnico', 'Pós técnico', 3),
   ('tecnologo', 'Tecnólogo', 4),
-  ('bacharelado', 'Bacharelado', 5),
-  ('superior-sequencial', 'Superior sequencial', 6),
-  ('mestrado', 'Mestrado', 7),
-  ('pos-graduacao', 'Pós-graduação', 8),
-  ('profissionalizantes', 'Profissionalizantes', 9);
+  ('profissionalizantes', 'Profissionalizantes', 5);
 
 -- Seed de conteúdo da Home
 INSERT INTO public.site_content (key, value) VALUES
   ('hero', jsonb_build_object(
     'badge', 'Diploma reconhecido nacionalmente',
     'title', 'Transforme sua carreira em <highlight>instituições de referência nacional</highlight>',
-    'subtitle', 'A Uniágape Educacional reúne mais de 4.000 cursos — de EJA e Cursos Técnicos a Bacharelados, Licenciaturas, Segundas Graduações e Pós-graduações.',
+    'subtitle', 'A HUB EDU reúne mais de 100 cursos — de EJA e Cursos Técnicos a Tecnólogos.',
     'primary_button_label', 'Ver cursos disponíveis',
     'primary_button_target', 'cursos',
     'secondary_button_label', 'Saiba mais',

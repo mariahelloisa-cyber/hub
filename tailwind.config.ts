@@ -97,6 +97,10 @@ export default {
           "0%": { opacity: "0", transform: "translateY(20px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        "fade-in": {
+          "0%": { opacity: "0", transform: "translateY(12px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
         "pulse-soft": {
           "0%, 100%": { transform: "scale(1)", boxShadow: "0 8px 24px -8px hsl(142 70% 45% / 0.45)" },
           "50%": { transform: "scale(1.05)", boxShadow: "0 12px 32px -8px hsl(142 70% 45% / 0.65)" },
@@ -106,6 +110,7 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in-up": "fade-in-up 0.6s ease-out forwards",
+        "fade-in": "fade-in 0.6s ease-out forwards",
         "pulse-soft": "pulse-soft 2.5s ease-in-out infinite",
       },
     },

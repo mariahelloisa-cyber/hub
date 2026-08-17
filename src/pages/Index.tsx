@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import SubNav from "@/components/SubNav";
 import Hero from "@/components/Hero";
+import VideoTextBanner from "@/components/VideoTextBanner";
 import Benefits from "@/components/Benefits";
 import Courses from "@/components/Courses";
 import Categories from "@/components/Categories";
@@ -10,6 +11,7 @@ import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import PopupDisplay from "@/components/PopupDisplay";
+import Reveal from "@/components/Reveal";
 
 const Index = () => {
   return (
@@ -18,12 +20,23 @@ const Index = () => {
       <SubNav />
       <main>
         <Hero />
+        <Reveal>
+          <VideoTextBanner />
+        </Reveal>
         <Courses />
-        <Benefits />
+        <Reveal>
+          <Benefits />
+        </Reveal>
         <Categories />
-        <SocialProof />
-        <BlogSection />
-        <FinalCTA />
+        <Reveal>
+          <SocialProof />
+        </Reveal>
+        <Reveal>
+          <BlogSection />
+        </Reveal>
+        <Reveal>
+          <FinalCTA />
+        </Reveal>
       </main>
       <Footer />
       <FloatingWhatsApp />
