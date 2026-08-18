@@ -14,7 +14,7 @@ const Courses = () => {
 
 
   return (
-    <section id="cursos" className="bg-background pb-20 pt-6 md:pb-28 md:pt-10">
+    <section id="cursos" className="bg-background pb-4 pt-6 md:pb-6 md:pt-10">
       <div className="container">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-sm font-semibold uppercase tracking-wider text-primary">Cursos em destaque</p>

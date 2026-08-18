@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import VideoTextBanner from "@/components/VideoTextBanner";
 import Benefits from "@/components/Benefits";
 import Courses from "@/components/Courses";
+import Recognition from "@/components/Recognition";
 import Categories from "@/components/Categories";
 import SocialProof from "@/components/SocialProof";
 import FinalCTA from "@/components/FinalCTA";
@@ -23,6 +24,9 @@ const Index = () => {
           <VideoTextBanner />
         </Reveal>
         <Courses />
+        <Reveal>
+          <Recognition />
+        </Reveal>
         <Reveal>
           <Benefits />
         </Reveal>
