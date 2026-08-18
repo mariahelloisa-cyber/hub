@@ -6,7 +6,6 @@ import Benefits from "@/components/Benefits";
 import Courses from "@/components/Courses";
 import Categories from "@/components/Categories";
 import SocialProof from "@/components/SocialProof";
-import BlogSection from "@/components/BlogSection";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
@@ -30,9 +29,6 @@ const Index = () => {
         <Categories />
         <Reveal>
           <SocialProof />
-        </Reveal>
-        <Reveal>
-          <BlogSection />
         </Reveal>
         <Reveal>
           <FinalCTA />
