@@ -81,8 +81,8 @@ export default {
         soft: "var(--shadow-soft)",
       },
       fontFamily: {
-        sans: ["DM Sans", "system-ui", "sans-serif"],
-        display: ["Fredoka", "DM Sans", "system-ui", "sans-serif"],
+        sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "sans-serif"],
+        display: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "sans-serif"],
       },
       keyframes: {
         "accordion-down": {
@@ -105,6 +105,10 @@ export default {
           "0%, 100%": { transform: "scale(1)", boxShadow: "0 8px 24px -8px hsl(142 70% 45% / 0.45)" },
           "50%": { transform: "scale(1.05)", boxShadow: "0 12px 32px -8px hsl(142 70% 45% / 0.65)" },
         },
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -112,6 +116,7 @@ export default {
         "fade-in-up": "fade-in-up 0.6s ease-out forwards",
         "fade-in": "fade-in 0.6s ease-out forwards",
         "pulse-soft": "pulse-soft 2.5s ease-in-out infinite",
+        marquee: "marquee linear infinite",
       },
     },
   },

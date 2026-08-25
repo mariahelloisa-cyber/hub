@@ -10,7 +10,7 @@ const Courses = () => {
   const featured = [
     ...courses.filter((c) => c.highlight),
     ...courses.filter((c) => !c.highlight),
-  ].slice(0, 6);
+  ].slice(0, 8);
 
 
   return (
@@ -23,9 +23,9 @@ const Courses = () => {
           </h2>
         </div>
 
-        <div className="mt-14 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {featured.map((course) => (
-            <CourseCard key={course.id} course={course} />
+            <CourseCard key={course.id} course={course} compact />
           ))}
         </div>
 

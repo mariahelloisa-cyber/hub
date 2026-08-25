@@ -19,9 +19,11 @@ const cards = [
 
 const Recognition = () => {
   return (
-    <section className="bg-background pb-0 pt-0">
+    <section className="bg-background pb-0 pt-12 md:pt-16">
       <div className="container">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <p className="text-center text-sm font-semibold uppercase tracking-wider text-primary">Selo de qualidade</p>
+
+        <div className="mt-2 grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
             <h2 className="font-display text-4xl font-bold leading-tight text-foreground md:text-5xl">
               Cursos reconhecidos <br />

@@ -25,12 +25,12 @@ const Index = () => {
         </Reveal>
         <Courses />
         <Reveal>
-          <Recognition />
-        </Reveal>
-        <Reveal>
           <Benefits />
         </Reveal>
         <Categories />
+        <Reveal>
+          <Recognition />
+        </Reveal>
         <Reveal>
           <SocialProof />
         </Reveal>

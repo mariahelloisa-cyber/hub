@@ -22,7 +22,7 @@ const categories: Category[] = [
   { name: "Técnico por competência", slug: "tecnico-competencia", count: "45+ cursos", icon: Award },
   { name: "Pós técnico", slug: "pos-tecnico", count: "15+ cursos", icon: GraduationCap },
   { name: "Tecnólogo", slug: "tecnologo", count: "40+ cursos", icon: BookOpen },
-  { name: "EJA", slug: "eja", count: "Ensino de jovens e adultos", icon: Users },
+  { name: "EJA", slug: "eja", count: "3 Cursos", icon: Users },
   { name: "Profissionalizantes", slug: "profissionalizantes", count: "900+ cursos", icon: Briefcase },
 ];
 
@@ -30,7 +30,7 @@ const Categories = () => {
   return (
     <section
       id="categorias"
-      className="relative overflow-hidden bg-[hsl(212_76%_7%)] py-20 md:py-28"
+      className="relative overflow-hidden bg-[hsl(212_76%_7%)] pb-20 pt-8 md:pb-28 md:pt-12"
     >
       {/* Decorative glows */}
       <div
