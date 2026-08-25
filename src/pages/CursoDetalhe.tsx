@@ -66,8 +66,19 @@ const CursoDetalhe = () => {
       <SubNav />
       <main>
         {/* HERO */}
-        <section className="bg-gradient-hero text-primary-foreground">
-          <div className="container py-10 md:py-14">
+        <section
+          className="relative overflow-hidden bg-gradient-hero text-primary-foreground"
+          style={
+            course.coverImage
+              ? {
+                  backgroundImage: `linear-gradient(hsl(var(--hero-bg) / 0.65), hsl(var(--hero-bg) / 0.65)), url(${course.coverImage})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }
+              : undefined
+          }
+        >
+          <div className="container relative py-10 md:py-14">
             <h1 className="font-display text-3xl font-bold uppercase leading-tight md:text-5xl">
               {course.name}
             </h1>

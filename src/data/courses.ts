@@ -21,6 +21,7 @@ export interface Course {
   area?: string;
   category: string;
   image?: string;
+  coverImage?: string;
   curriculum?: string;
 }
 

@@ -19,6 +19,7 @@ export interface DbCourse {
   area: string | null;
   category_slug: string;
   image_url: string | null;
+  cover_image_url: string | null;
   highlight: boolean;
   sort_order: number;
   curriculum: string | null;

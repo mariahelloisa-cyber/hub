@@ -11,13 +11,18 @@ const WHATSAPP_ONLY_CATEGORIES = new Set<string>([]);
 
 interface CourseCardProps {
   course: Course;
+  /** Card bem enxuto, sem descrição — usado nos secundários da home ("Cursos em destaque"). */
   compact?: boolean;
+  /** Card de tamanho médio com descrição visível — usado no catálogo (/cursos). */
+  catalog?: boolean;
+  /** Card grande de destaque — usado no card principal da home. */
   featured?: boolean;
 }
 
-const CourseCard = ({ course, compact = false, featured = false }: CourseCardProps) => {
+const CourseCard = ({ course, compact = false, catalog = false, featured = false }: CourseCardProps) => {
   const isAcademic = !WHATSAPP_ONLY_CATEGORIES.has(course.category);
   const displayImage = course.image ?? getAreaPhoto(course.name, course.area, course.category);
+  const small = compact || catalog;
 
   const ctaClasses = cn(
     "inline-flex w-full items-center justify-center gap-2 rounded-lg font-semibold",
@@ -25,18 +30,23 @@ const CourseCard = ({ course, compact = false, featured = false }: CourseCardPro
     "transition-[transform,background-color,box-shadow] duration-300",
     "hover:-translate-y-0.5 hover:bg-primary/90",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
-    featured ? "mt-6 px-6 py-3.5 text-base" : compact ? "mt-2.5 px-4 py-1.5 text-sm" : "mt-5 px-6 py-3 text-base",
+    featured ? "mt-6 px-6 py-3.5 text-base" : small ? "mt-4 px-3.5 py-2.5 text-sm" : "mt-5 px-6 py-3 text-base",
   );
 
   return (
     <article
       className={cn(
         "group relative flex h-full flex-col overflow-hidden border bg-card shadow-card transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-card-hover",
-        featured || compact ? "rounded-[20px]" : "rounded-xl",
+        featured || small ? "rounded-[20px]" : "rounded-xl",
         course.highlight ? "border-accent ring-1 ring-accent/40" : "border-border",
       )}
     >
-      <div className={cn("relative w-full overflow-hidden bg-muted", compact ? "aspect-[2/1]" : "aspect-[16/10]")}>
+      <div
+        className={cn(
+          "relative w-full overflow-hidden bg-muted",
+          compact ? "aspect-[2/1]" : catalog ? "aspect-[16/9]" : "aspect-[16/10]",
+        )}
+      >
         <img
           src={displayImage}
           alt={course.name}
@@ -45,14 +55,14 @@ const CourseCard = ({ course, compact = false, featured = false }: CourseCardPro
           height={640}
           className={cn(
             "h-full w-full object-cover transition-transform group-hover:scale-105",
-            featured || compact ? "duration-300" : "duration-500",
+            featured || small ? "duration-300" : "duration-500",
           )}
         />
         {course.highlight && (
           <span
             className={cn(
               "absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-accent font-bold uppercase tracking-wider text-accent-foreground shadow-soft",
-              featured ? "px-3.5 py-1.5 text-xs" : compact ? "px-2.5 py-0.5 text-[10px]" : "px-3 py-1 text-xs",
+              featured ? "px-3.5 py-1.5 text-xs" : small ? "px-2.5 py-0.5 text-[10px]" : "px-3 py-1 text-xs",
             )}
           >
             {featured && <Flame className="h-3.5 w-3.5" />}
@@ -61,7 +71,12 @@ const CourseCard = ({ course, compact = false, featured = false }: CourseCardPro
         )}
       </div>
 
-      <div className={cn("flex flex-1 flex-col", featured ? "p-7" : compact ? "p-3" : "p-6")}>
+      <div
+        className={cn(
+          "flex flex-1 flex-col",
+          featured ? "p-7" : catalog ? "px-3.5 py-4" : compact ? "p-3" : "p-6",
+        )}
+      >
         {course.area && (
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-primary">
             <Tag className="h-3.5 w-3.5" />
@@ -72,7 +87,13 @@ const CourseCard = ({ course, compact = false, featured = false }: CourseCardPro
         <h3
           className={cn(
             "font-display font-bold text-foreground",
-            featured ? "mt-3 text-2xl md:text-3xl" : compact ? "mt-1 text-sm leading-snug" : "mt-3 text-xl",
+            featured
+              ? "mt-3 text-2xl md:text-3xl"
+              : catalog
+                ? "mt-2 text-base leading-snug"
+                : compact
+                  ? "mt-1 text-sm leading-snug"
+                  : "mt-3 text-xl",
           )}
         >
           {course.name}
@@ -81,7 +102,7 @@ const CourseCard = ({ course, compact = false, featured = false }: CourseCardPro
           <p
             className={cn(
               "leading-relaxed text-muted-foreground",
-              featured ? "mt-2 line-clamp-2 text-base" : "mt-2 flex-1",
+              featured ? "mt-2 line-clamp-2 text-base" : catalog ? "mt-1.5 line-clamp-3 flex-1 text-sm" : "mt-2 flex-1",
             )}
           >
             {course.description ?? "Curso técnico reconhecido. Fale com um consultor para mais informações sobre matrícula e início das aulas."}
@@ -91,28 +112,33 @@ const CourseCard = ({ course, compact = false, featured = false }: CourseCardPro
         <div
           className={cn(
             "flex flex-wrap items-center gap-x-4 gap-y-1 text-muted-foreground",
-            featured ? "mt-5 text-sm" : compact ? "mt-1.5 flex-1 text-xs" : "mt-5 text-sm",
+            featured ? "mt-5 text-sm" : catalog ? "mt-3 text-xs" : compact ? "mt-1.5 flex-1 text-xs" : "mt-5 text-sm",
           )}
         >
           <span className="inline-flex items-center gap-2">
-            <Clock className={featured ? "h-4 w-4" : compact ? "h-3.5 w-3.5" : "h-4 w-4"} />
+            <Clock className={featured ? "h-4 w-4" : small ? "h-3.5 w-3.5" : "h-4 w-4"} />
             Duração: {course.duration}
           </span>
           {course.workload && (
             <span className="inline-flex items-center gap-2">
-              <Tag className={featured ? "h-4 w-4" : compact ? "h-3.5 w-3.5" : "h-4 w-4"} />
+              <Tag className={featured ? "h-4 w-4" : small ? "h-3.5 w-3.5" : "h-4 w-4"} />
               {course.workload}
             </span>
           )}
         </div>
 
         {typeof course.price === "number" && (
-          <div className={cn("border-t border-border", featured ? "mt-5 pt-5" : compact ? "mt-2 pt-2" : "mt-5 pt-5")}>
+          <div
+            className={cn(
+              "border-t border-border",
+              featured ? "mt-5 pt-5" : catalog ? "mt-3 pt-3" : compact ? "mt-2 pt-2" : "mt-5 pt-5",
+            )}
+          >
             <p className="text-xs font-medium text-muted-foreground">A partir de</p>
             <p
               className={cn(
                 "font-display font-bold text-primary",
-                featured ? "text-4xl" : compact ? "text-lg" : "text-3xl",
+                featured ? "text-4xl" : small ? "text-lg" : "text-3xl",
               )}
             >
               {formatPrice(course.price)}
@@ -123,12 +149,12 @@ const CourseCard = ({ course, compact = false, featured = false }: CourseCardPro
 
         {isAcademic ? (
           <Link to={`/cursos/${course.id}`} className={ctaClasses}>
-            {featured ? "Saiba mais" : "Saiba mais"}
+            {featured ? "Conhecer o curso" : "Saiba mais"}
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
           </Link>
         ) : (
           <WhatsAppButton
-            className={featured ? "mt-6 w-full" : compact ? "mt-2.5 w-full" : "mt-5 w-full"}
+            className={featured ? "mt-6 w-full" : small ? "mt-4 w-full" : "mt-5 w-full"}
             message={`Olá! Tenho interesse no curso ${course.name}. Gostaria de mais informações.`}
           >
             Quero me inscrever

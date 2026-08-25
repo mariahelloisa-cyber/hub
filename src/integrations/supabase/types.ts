@@ -82,6 +82,7 @@ export type Database = {
           area: string | null
           category_slug: string
           created_at: string
+          cover_image_url: string | null
           curriculum: string | null
           description: string | null
           duration: string | null
@@ -98,6 +99,7 @@ export type Database = {
         Insert: {
           area?: string | null
           category_slug: string
+          cover_image_url?: string | null
           created_at?: string
           curriculum?: string | null
           description?: string | null
@@ -115,6 +117,7 @@ export type Database = {
         Update: {
           area?: string | null
           category_slug?: string
+          cover_image_url?: string | null
           created_at?: string
           curriculum?: string | null
           description?: string | null

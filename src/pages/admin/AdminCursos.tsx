@@ -46,6 +46,7 @@ const empty = (): Form => ({
   area: "",
   category_slug: "cursos-tecnicos",
   image_url: "",
+  cover_image_url: "",
   highlight: false,
   sort_order: 0,
   curriculum: "",
@@ -65,6 +66,7 @@ const AdminCursos = () => {
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState<Form>(empty());
   const [uploading, setUploading] = useState(false);
+  const [uploadingCover, setUploadingCover] = useState(false);
 
   const filtered = useMemo(() => {
     let list = courses ?? [];
@@ -95,6 +97,19 @@ const AdminCursos = () => {
       toast.error(e.message);
     } finally {
       setUploading(false);
+    }
+  };
+
+  const onUploadCover = async (file: File) => {
+    setUploadingCover(true);
+    try {
+      const url = await uploadMedia(file, "courses");
+      setForm((f) => ({ ...f, cover_image_url: url }));
+      toast.success("Imagem de capa enviada");
+    } catch (e: any) {
+      toast.error(e.message);
+    } finally {
+      setUploadingCover(false);
     }
   };
 
@@ -282,6 +297,34 @@ const AdminCursos = () => {
                   placeholder="ou cole uma URL"
                   value={form.image_url ?? ""}
                   onChange={(e) => setForm({ ...form, image_url: e.target.value })}
+                />
+              </div>
+            </div>
+            <div className="sm:col-span-2">
+              <Label>Imagem de capa (banner da página do curso)</Label>
+              <div className="flex items-center gap-3">
+                <div className="h-16 w-28 overflow-hidden rounded bg-muted">
+                  {form.cover_image_url && (
+                    <img src={form.cover_image_url} alt="" className="h-full w-full object-cover" />
+                  )}
+                </div>
+                <label className="cursor-pointer">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => e.target.files?.[0] && onUploadCover(e.target.files[0])}
+                  />
+                  <span className="inline-flex items-center gap-2 rounded-md border bg-background px-3 py-2 text-sm hover:bg-muted">
+                    {uploadingCover ? <Loader2 className="h-4 w-4 animate-spin" /> : <Upload className="h-4 w-4" />}
+                    Enviar imagem
+                  </span>
+                </label>
+                <Input
+                  className="flex-1"
+                  placeholder="ou cole uma URL"
+                  value={form.cover_image_url ?? ""}
+                  onChange={(e) => setForm({ ...form, cover_image_url: e.target.value })}
                 />
               </div>
             </div>

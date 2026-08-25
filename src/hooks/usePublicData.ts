@@ -13,6 +13,7 @@ interface DbCourseRow {
   area: string | null;
   category_slug: string;
   image_url: string | null;
+  cover_image_url: string | null;
   highlight: boolean;
   sort_order: number;
   curriculum: string | null;
@@ -28,6 +29,7 @@ const toCourse = (r: DbCourseRow): Course => ({
   area: r.area ?? undefined,
   category: r.category_slug,
   image: r.image_url ?? undefined,
+  coverImage: r.cover_image_url ?? undefined,
   highlight: r.highlight,
   curriculum: r.curriculum ?? undefined,
 });
@@ -42,7 +44,7 @@ export const usePublicCourses = () => {
     queryFn: async (): Promise<Course[]> => {
       const { data, error } = await supabase
         .from("courses")
-        .select("slug,name,description,price,duration,workload,area,category_slug,image_url,highlight,sort_order,curriculum")
+        .select("slug,name,description,price,duration,workload,area,category_slug,image_url,cover_image_url,highlight,sort_order,curriculum")
         .order("sort_order")
         .order("name")
         .limit(2000);

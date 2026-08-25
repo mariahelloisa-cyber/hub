@@ -187,9 +187,11 @@ const Cursos = () => {
         {/* FILTERS + RESULTS */}
         <section id="resultados" className="bg-background py-6 md:py-8">
           <div className="container">
+            <p className="text-xs font-semibold uppercase tracking-wider text-primary">Filtros</p>
+
             {/* Category chips - compact */}
             <div
-              className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0"
+              className="-mx-4 mt-3 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0"
               role="tablist"
               aria-label="Filtrar por categoria"
             >
@@ -289,9 +291,9 @@ const Cursos = () => {
               ) : (
                 <>
                   {filtered.length > 0 ? (
-                    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                       {paginated.map((course) => (
-                        <CourseCard key={course.id} course={course} />
+                        <CourseCard key={course.id} course={course} catalog />
                       ))}
                     </div>
                   ) : (

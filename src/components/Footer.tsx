@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { GraduationCap, Instagram, Facebook, Youtube, Linkedin } from "lucide-react";
+import { GraduationCap, Instagram, Facebook, Youtube, Linkedin, Shield } from "lucide-react";
 import { usePublicCategories } from "@/hooks/usePublicData";
 
 const institucionalLinks = [
@@ -41,6 +41,14 @@ const Footer = () => {
                   Hub <span className="text-primary">Edu</span>
                 </p>
               </div>
+              <Link
+                to="/admin"
+                title="Admin"
+                aria-label="Admin"
+                className="text-primary transition-colors hover:text-primary/80"
+              >
+                <Shield className="h-5 w-5" />
+              </Link>
             </div>
             <p className="mt-3 text-sm leading-relaxed text-white/70">
               Educação que conecta você ao conhecimento e ao mercado de trabalho.
