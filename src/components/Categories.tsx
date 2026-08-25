@@ -30,7 +30,7 @@ const Categories = () => {
   return (
     <section
       id="categorias"
-      className="relative overflow-hidden bg-[hsl(212_76%_7%)] pb-20 pt-8 md:pb-28 md:pt-12"
+      className="relative overflow-hidden bg-[hsl(212_76%_7%)] pb-20 pt-14 md:pb-28 md:pt-20"
     >
       {/* Decorative glows */}
       <div

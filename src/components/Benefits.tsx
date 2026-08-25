@@ -33,7 +33,7 @@ const dotPatternStyle = {
 
 const Benefits = () => {
   return (
-    <section id="beneficios" className="bg-background pb-14 pt-20 md:pb-20 md:pt-28">
+    <section id="beneficios" className="bg-background pb-20 pt-20 md:pb-28 md:pt-28">
       <div className="container">
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1fr_1.15fr] lg:gap-12">
           {/* Coluna esquerda: eyebrow, título e texto */}
