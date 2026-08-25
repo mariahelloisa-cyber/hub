@@ -9,9 +9,8 @@ import { toast } from "sonner";
 import { Loader2, ShieldCheck } from "lucide-react";
 
 const AdminLogin = () => {
-  const { signIn, signUp, user, isAdmin, loading } = useAuth();
+  const { signIn, user, isAdmin, loading } = useAuth();
   const navigate = useNavigate();
-  const [mode, setMode] = useState<"login" | "signup">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -46,18 +45,14 @@ const AdminLogin = () => {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
-    const { error } = mode === "login" ? await signIn(email, password) : await signUp(email, password);
+    const { error } = await signIn(email, password);
     setSubmitting(false);
     if (error) {
       toast.error(error.message);
       return;
     }
-    if (mode === "signup") {
-      toast.success("Conta criada. Peça a um admin para conceder a permissão.");
-    } else {
-      toast.success("Bem-vindo!");
-      navigate("/admin");
-    }
+    toast.success("Bem-vindo!");
+    navigate("/admin");
   };
 
   return (
@@ -68,9 +63,7 @@ const AdminLogin = () => {
             <ShieldCheck className="h-6 w-6" />
           </div>
           <CardTitle className="mt-2">Painel Admin</CardTitle>
-          <CardDescription>
-            {mode === "login" ? "Entre para gerenciar o conteúdo" : "Criar nova conta admin"}
-          </CardDescription>
+          <CardDescription>Entre para gerenciar o conteúdo</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={onSubmit} className="space-y-4">
@@ -94,20 +87,13 @@ const AdminLogin = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 minLength={6}
-                autoComplete={mode === "login" ? "current-password" : "new-password"}
+                autoComplete="current-password"
               />
             </div>
             <Button type="submit" className="w-full" disabled={submitting}>
               {submitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              {mode === "login" ? "Entrar" : "Criar conta"}
+              Entrar
             </Button>
-            <button
-              type="button"
-              className="w-full text-sm text-muted-foreground hover:text-foreground"
-              onClick={() => setMode(mode === "login" ? "signup" : "login")}
-            >
-              {mode === "login" ? "Não tem conta? Criar uma" : "Já tem conta? Entrar"}
-            </button>
           </form>
         </CardContent>
       </Card>

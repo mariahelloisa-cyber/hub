@@ -172,12 +172,27 @@ export const useSaveContact = () => {
   });
 };
 
+const ALLOWED_MEDIA_TYPES: Record<string, string> = {
+  "image/jpeg": "jpg",
+  "image/png": "png",
+  "image/webp": "webp",
+  "image/gif": "gif",
+};
+const MAX_MEDIA_BYTES = 10 * 1024 * 1024; // 10MB
+
 export async function uploadMedia(file: File, folder = "uploads"): Promise<string> {
-  const ext = file.name.split(".").pop() ?? "bin";
+  const ext = ALLOWED_MEDIA_TYPES[file.type];
+  if (!ext) {
+    throw new Error("Tipo de arquivo não permitido. Envie apenas JPG, PNG, WEBP ou GIF.");
+  }
+  if (file.size > MAX_MEDIA_BYTES) {
+    throw new Error("Arquivo muito grande. O limite é 10MB.");
+  }
   const path = `${folder}/${crypto.randomUUID()}.${ext}`;
   const { error } = await supabase.storage.from("site-media").upload(path, file, {
     cacheControl: "3600",
     upsert: false,
+    contentType: file.type,
   });
   if (error) throw error;
   const { data } = supabase.storage.from("site-media").getPublicUrl(path);

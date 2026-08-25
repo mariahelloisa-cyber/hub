@@ -56,10 +56,15 @@ const FormSection = ({ title, children }: { title: string; children: React.React
 // --- Componente Principal ---
 const Formulario = () => {
   const { data: contact } = usePublicContact();
+  const [consent, setConsent] = React.useState(false);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
+    if (!consent) {
+      return;
+    }
+
     // Captura automática de todos os campos usando o 'name'
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
@@ -228,6 +233,23 @@ const Formulario = () => {
             </div>
           </FormSection>
 
+          {/* CONSENTIMENTO LGPD */}
+          <div className="mb-6 flex items-start gap-2.5 rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+            <input
+              type="checkbox"
+              id="consentimentoLgpd"
+              checked={consent}
+              onChange={(e) => setConsent(e.target.checked)}
+              required
+              className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300"
+            />
+            <label htmlFor="consentimentoLgpd" className="text-xs text-slate-600">
+              Autorizo o uso dos meus dados pessoais e documentos informados neste formulário
+              exclusivamente para fins de processamento desta matrícula, em conformidade com a
+              Lei Geral de Proteção de Dados (LGPD). <span className="text-red-500">*</span>
+            </label>
+          </div>
+
           {/* BOTÕES DE AÇÃO */}
           <div className="mt-8 flex flex-col-reverse justify-end gap-3 md:flex-row">
             <button
@@ -238,7 +260,8 @@ const Formulario = () => {
             </button>
             <button
               type="submit"
-              className="rounded-md bg-primary px-8 py-3 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              disabled={!consent}
+              className="rounded-md bg-primary px-8 py-3 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
             >
               Enviar matrícula
             </button>
